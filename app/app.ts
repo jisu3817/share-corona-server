@@ -11,6 +11,6 @@ app.use(express.urlencoded({ extended: false }));
 
 import root from "./src/apis/root";
 
-app.use("/api/", root);
+app.use("/api", root);
 
 export default app;

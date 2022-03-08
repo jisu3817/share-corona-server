@@ -1,14 +1,20 @@
 module.exports = {
+  clearMocks: true,
+  collectCoverage: true,
+  coverageDirectory: 'coverage',
+  preset: 'ts-jest',
   testEnvironment: 'node',
-  bail: true,
-  verbose: true,
-  testRegex: '(/tests/.*[.](test|spec))\\.(ts|tsx|js)$',
-  setupFilesAfterEnv: ['<rootDir>/src/tests/setup.js'],
+  setupFiles: ['dotenv/config'],
   moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx', 'json'],
+  transform: {
+    '^.+\\.(js|jsx)?$': 'babel-jest',
+  },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/$1',
+  },
+  testMatch: [
+    '<rootDir>/**/*.test.(js|jsx|ts|tsx)',
+    '<rootDir>/(tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx))',
+  ],
   transformIgnorePatterns: ['<rootDir>/node_modules/'],
-  coveragePathIgnorePatterns: ['/node_modules/'],
-  // clearMocks: true,
-  // collectCoverage: true,
-  // coverageDirectory: 'coverage',
-  // coverageProvider: 'v8',
 };

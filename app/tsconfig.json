@@ -1,21 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es6",                                  
+    "target": "es5",                                  
     "module": "commonjs", 
-    "moduleResolution": "node", 
+    // "moduleResolution": "node", 
     "outDir": "./dist",                                                          
     "esModuleInterop": true,                             
     "forceConsistentCasingInFileNames": true,            
     "strict": true,         
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*"]
-    },         
-    "downlevelIteration": true,   
-    "noImplicitAny": false                  
+    // "baseUrl": ".",
+    // "paths": {
+      // "*": ["node_modules/*"]
+    // },         
+    // "downlevelIteration": true,   
+    // "noImplicitAny": false,
+    "types": ["jest", "node", "@types/jest"],     
   },
+  "compileOnSave": true,
+  "buildOnSave": true,
   "include": ["./**/*"],
   "exclude": ["node_modules"],
-  "typeRoots": ["./@types", "./node_modules/@types"]
+  "typeRoots": ["./src/@types/", "./node_modules/@types"]
 }

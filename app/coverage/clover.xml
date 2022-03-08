@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1646751711181" clover="3.2.0">
+  <project timestamp="1646751711181" name="All files">
+    <metrics statements="12" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3" elements="17" coveredelements="15" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
+    <file name="user.ts" path="/Users/kimjisu/Desktop/share-corona-server/app/src/models/services/user/user.ts">
+      <metrics statements="12" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="6" count="2" type="stmt"/>
+      <line num="7" count="2" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="11" count="2" type="stmt"/>
+      <line num="13" count="2" type="stmt"/>
+      <line num="14" count="2" type="cond" truecount="1" falsecount="0"/>
+      <line num="15" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="17" count="0" type="stmt"/>
+      <line num="19" count="0" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="24" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>
