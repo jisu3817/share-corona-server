@@ -41,7 +41,7 @@ class User {
 
     try {
       if (id === undefined) return { success: false, msg: '아이디를 입력해주세요.' };
-      if (id.length < 5) return { success: false, msg: '아이디가 5자 이하입니다.' };
+      if (id.length < 5) return { success: false, msg: '아이디는 5자리 이상 가능합니다.' };
 
       const DuplicatedId = await UserStorage.checkIdDuplication(id);
 
@@ -58,7 +58,7 @@ class User {
 
     try {
       if (password === undefined) return { success: false, msg: '비밀번호를 입력해주세요.' };
-      // if (userId.length < 5) return { success: false, msg: '아이디 값이 5자 이하입니다.' };
+      if (password.length < 9) return { success: false, msg: '비밀번호는 8자리 이상 가능합니다.' };
 
       // const DuplicatedId = await UserStorage.checkIdDuplication(userId);
 

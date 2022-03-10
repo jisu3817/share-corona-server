@@ -33,7 +33,7 @@ describe('checkId 함수 테스트', () => {
   it('id값의 길이가 5이하라면 false 반환', async () => {
     const createId = await user.checkId();
 
-    expect(createId).toEqual({ success: false, msg: '아이디가 5자 이하입니다.' });
+    expect(createId).toEqual({ success: false, msg: '아이디는 5자리 이상 가능합니다.' });
   });
 
   it('id값이 중복되는 데이터가 있다면 false 반환', async () => {
@@ -92,7 +92,11 @@ describe('checkPassword 함수 테스트', () => {
     expect(createPassword).toEqual({ success: false, msg: '비밀번호를 입력해주세요.' });
   });
 
-  // it('password 길이가 8자 이하라면 false 반환', () => {});
+  it('password 길이가 8자 이하라면 false 반환', async () => {
+    const createPassword = await user.checkPassword();
+
+    expect(createPassword).toEqual({ success: false, msg: '비밀번호는 8자리 이상 가능합니다.' });
+  });
 
   // it('password 값이 유효성 검사를 통과하지 못하는 경우 false 반환', () => {});
 
