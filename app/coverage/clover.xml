@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646751711181" clover="3.2.0">
-  <project timestamp="1646751711181" name="All files">
+<coverage generated="1646897123379" clover="3.2.0">
+  <project timestamp="1646897123379" name="All files">
     <metrics statements="12" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3" elements="17" coveredelements="15" complexity="0" loc="12" ncloc="12" packages="1" files="1" classes="1"/>
     <file name="user.ts" path="/Users/kimjisu/Desktop/share-corona-server/app/src/models/services/user/user.ts">
       <metrics statements="12" coveredstatements="10" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>

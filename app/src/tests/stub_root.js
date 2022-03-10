@@ -1,7 +1,7 @@
-class stubUser {
-  async idCheck () {
-    return true;
-  };
-};
+// class stubUser {
+//   async idCheck() {
+//     return true;
+//   }
+// }
 
-module.exports = stubUser;
+// module.exports = stubUser;
