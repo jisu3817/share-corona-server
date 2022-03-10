@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">92% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>18/18</span>
+                <span class='fraction'>23/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/3</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">90% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>18/20</span>
             </div>
         
             
@@ -154,8 +154,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -192,20 +192,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -253,35 +253,35 @@ class User {
     const { id } = this.body;
 &nbsp;
     try {
-      if (id === undefined) return { success: false, msg: '아이디 값을 입력해주세요.' };
-      if (id.length &lt; 5) return { success: false, msg: '아이디 값이 5자 이하입니다.' };
+      if (id === undefined) return { success: false, msg: '아이디를 입력해주세요.' };
+      if (id.length &lt; 5) return { success: false, msg: '아이디가 5자 이하입니다.' };
 &nbsp;
       const DuplicatedId = await UserStorage.checkIdDuplication(id);
 &nbsp;
       if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
       // 토큰 생성 코드가 들어갈 곳.
-      return { success: true, msg: '아이디 유효 검사 완료' };
+      return { success: true, msg: '아이디 유효성 검사 완료' };
     } catch (err) {
       return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
     }
   }
 &nbsp;
-  // async checkPassword(): Promise&lt;response | error&gt; {
-  //   const { password } = this.body;
+  async checkPassword(): Promise&lt;response | error&gt; {
+    const { password } = this.body;
 &nbsp;
-  //   try {
-  //     if (password === undefined) return { success: false, msg: '비밀번호를 입력해주세요.' };
-  //     if (userId.length &lt; 5) return { success: false, msg: '아이디 값이 5자 이하입니다.' };
+    try {
+      if (password === undefined) return { success: false, msg: '비밀번호를 입력해주세요.' };
+      // if (userId.length &lt; 5) return { success: false, msg: '아이디 값이 5자 이하입니다.' };
 &nbsp;
-  //     const DuplicatedId = await UserStorage.checkIdDuplication(userId);
+      // const DuplicatedId = await UserStorage.checkIdDuplication(userId);
 &nbsp;
-  //     if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
-  //     // 토큰 생성 코드가 들어갈 곳.
-  //     return { success: true, msg: '회원가입 완료' };
-  //   } catch (err) {
-  //     return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
-  //   }
-  // }
+      // if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
+      // 토큰 생성 코드가 들어갈 곳.
+<span class="cstat-no" title="statement not covered" >      return { success: true, msg: '회원가입 완료' };</span>
+    } catch (err) {
+<span class="cstat-no" title="statement not covered" >      return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };</span>
+    }
+  }
 }
 &nbsp;
 export default User;
@@ -292,7 +292,7 @@ export default User;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Mar 10 2022 23:11:25 GMT+0900 (대한민국 표준시)
+                at Thu Mar 10 2022 23:28:57 GMT+0900 (대한민국 표준시)
             </div>
         <script src="../../../prettify.js"></script>
         <script>
