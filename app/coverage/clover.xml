@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1646917628319" clover="3.2.0">
-  <project timestamp="1646917628319" name="All files">
-    <metrics statements="38" coveredstatements="23" conditionals="10" coveredconditionals="3" methods="6" coveredmethods="4" elements="54" coveredelements="30" complexity="0" loc="38" ncloc="38" packages="2" files="3" classes="3"/>
+<coverage generated="1646921485943" clover="3.2.0">
+  <project timestamp="1646921485943" name="All files">
+    <metrics statements="30" coveredstatements="24" conditionals="7" coveredconditionals="3" methods="5" coveredmethods="4" elements="42" coveredelements="31" complexity="0" loc="30" ncloc="30" packages="2" files="3" classes="3"/>
     <package name="config">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="mariadb.ts" path="/Users/kimjisu/Desktop/share-corona-server/app/src/config/mariadb.ts">
@@ -13,31 +13,23 @@
       </file>
     </package>
     <package name="models.services.User">
-      <metrics statements="34" coveredstatements="19" conditionals="10" coveredconditionals="3" methods="6" coveredmethods="4"/>
+      <metrics statements="26" coveredstatements="20" conditionals="7" coveredconditionals="3" methods="5" coveredmethods="4"/>
       <file name="User.ts" path="/Users/kimjisu/Desktop/share-corona-server/app/src/models/services/User/User.ts">
-        <metrics statements="22" coveredstatements="13" conditionals="6" coveredconditionals="3" methods="4" coveredmethods="3"/>
+        <metrics statements="14" coveredstatements="14" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
         <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="11" count="1" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="15" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="16" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="20" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="29" count="3" type="stmt"/>
-        <line num="32" count="3" type="cond" truecount="1" falsecount="0"/>
-        <line num="33" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="35" count="1" type="stmt"/>
-        <line num="37" count="1" type="cond" truecount="1" falsecount="0"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="44" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
+        <line num="43" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="44" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="46" count="3" type="stmt"/>
+        <line num="48" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
       </file>
       <file name="UserStorage.ts" path="/Users/kimjisu/Desktop/share-corona-server/app/src/models/services/User/UserStorage.ts">
         <metrics statements="12" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="1"/>

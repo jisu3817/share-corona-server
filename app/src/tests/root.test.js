@@ -4,13 +4,7 @@ import UserStorage from '../models/services/User/UserStorage';
 
 jest.mock('../models/services/User/UserStorage');
 
-describe('checkId function test', () => {
-  const checkIdDuplication = jest.fn(async () => {
-    return { id: '12345' };
-  });
-
-  UserStorage.checkIdDuplication = checkIdDuplication;
-
+describe('checkId 함수 테스트', () => {
   let user;
   let req;
 
@@ -29,30 +23,62 @@ describe('checkId function test', () => {
     user = new User(req);
   });
 
-  it('if id is undefined, obj returns false with a msg', async () => {
+  it('id값이 undefined라면 false 반환', async () => {
     delete req.body.id;
-    const createUser = await user.checkId();
-    expect(createUser).toEqual({ success: false, msg: '아이디 값을 입력해주세요.' });
+    const createId = await user.checkId();
+    expect(createId).toEqual({ success: false, msg: '아이디 값을 입력해주세요.' });
   });
 
-  it('if id length less than 5, obj returns false with a msg', async () => {
-    const createUser = await user.checkId();
-    expect(createUser).toEqual({ success: false, msg: '아이디 값이 5자 이하입니다.' });
+  it('id값의 길이가 5이하라면 false 반환', async () => {
+    const createId = await user.checkId();
+    expect(createId).toEqual({ success: false, msg: '아이디 값이 5자 이하입니다.' });
   });
 
-  it('if id is not unique, obj returns false with a msg', async () => {
+  it('id값이 중복되는 데이터가 있다면 false 반환', async () => {
+    const checkIdDuplication = jest.fn(async () => {
+      return { id: '12345' };
+    });
+
+    UserStorage.checkIdDuplication = checkIdDuplication;
+
     req.body.id = '12345';
-    const createUser = await user.checkId();
+    const createId = await user.checkId();
 
-    expect(createUser).toEqual({ success: false, msg: '이미 존재하는 아이디입니다.' });
+    expect(createId).toEqual({ success: false, msg: '이미 존재하는 아이디입니다.' });
     expect(checkIdDuplication.mock.calls.length).toBe(1);
   });
 
-  it('if checkId function ocurrs error, obj returns error ', async () => {
-    req.body.id = '12345';
-    const createUser = await user.checkId();
+  it('checkIdDuplication 함수 실행 중 에러 발생시 catch의 에러 반환', async () => {
+    const checkIdDuplication = jest.fn(async () => {
+      const err = 'db error';
 
-    expect(createUser).toEqual({ success: false, msg: '이미 존재하는 아이디입니다.' });
+      throw err;
+    });
+
+    UserStorage.checkIdDuplication = checkIdDuplication;
+
+    // const createId = await user.checkId();
+    req.body.id = '12345';
+
+    expect(user.checkId()).rejects.toThrow({
+      isError: true,
+      errMsg: 'db error',
+      clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.',
+    });
+    expect(checkIdDuplication.mock.calls.length).toBe(1);
+  });
+
+  it('id값이 중복되는 값이 없다면 true 반환', async () => {
+    const checkIdDuplication = jest.fn(async () => {
+      return undefined;
+    });
+
+    UserStorage.checkIdDuplication = checkIdDuplication;
+
+    req.body.id = '12345';
+    const createId = await user.checkId();
+
+    expect(createId).toEqual({ success: true, msg: '아이디 유효 검사 완료' });
     expect(checkIdDuplication.mock.calls.length).toBe(1);
   });
 

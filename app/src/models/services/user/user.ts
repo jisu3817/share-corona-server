@@ -47,7 +47,7 @@ class User {
 
       if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
       // 토큰 생성 코드가 들어갈 곳.
-      return { success: true, msg: '회원가입 완료' };
+      return { success: true, msg: '아이디 유효 검사 완료' };
     } catch (err) {
       return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
     }
