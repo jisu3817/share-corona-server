@@ -1,5 +1,5 @@
 import * as express from 'express';
-import * as ctrl from './root.ctrl';
+import ctrl from './root.ctrl';
 
 const router: express.Router = express.Router();
 

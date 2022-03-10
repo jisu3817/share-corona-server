@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import User from '../../models/services/user/user';
+import User from '../../models/services/User/User';
 
-const process = {
-  signUp: async (req: Request, res: Response) => {
+const process: any = {
+  signUp: (req: Request, res: Response) => {
     const user = new User(req);
-
+    const response = user.signUp();
   },
 };
 
-export { process };
+export default { process };

@@ -1,10 +1,19 @@
 import 'regenerator-runtime';
-import User from '../models/services/user/user';
-import StubUser from './stub_root';
+import User from '../models/services/User/User';
+import UserStorage from '../models/services/User/UserStorage';
 
-describe('회원가입', () => {
+jest.mock('../models/services/User/UserStorage');
+
+describe('checkId function test', () => {
+  const checkIdDuplication = jest.fn(async () => {
+    return { id: '12345' };
+  });
+
+  UserStorage.checkIdDuplication = checkIdDuplication;
+
   let user;
   let req;
+
   beforeEach(() => {
     req = {
       body: {
@@ -17,28 +26,35 @@ describe('회원가입', () => {
       },
     };
 
-    user = new User(req, new StubUser());
+    user = new User(req);
   });
 
   it('if id is undefined, obj returns false with a msg', async () => {
     delete req.body.id;
-    const createUser = await user.signUp();
+    const createUser = await user.checkId();
     expect(createUser).toEqual({ success: false, msg: '아이디 값을 입력해주세요.' });
   });
 
   it('if id length less than 5, obj returns false with a msg', async () => {
-    const createUser = await user.signUp();
+    const createUser = await user.checkId();
     expect(createUser).toEqual({ success: false, msg: '아이디 값이 5자 이하입니다.' });
   });
 
-  it('if id is duplicated, obj returns false with a msg', async () => {
-    const createUser = await user.signUp();
+  it('if id is not unique, obj returns false with a msg', async () => {
+    req.body.id = '12345';
+    const createUser = await user.checkId();
+
     expect(createUser).toEqual({ success: false, msg: '이미 존재하는 아이디입니다.' });
+    expect(checkIdDuplication.mock.calls.length).toBe(1);
   });
 
-  // it('unique id가 아니라면 throw error 반환', () => {
-  //   expect().toBeTruthy();
-  // });
+  it('if checkId function ocurrs error, obj returns error ', async () => {
+    req.body.id = '12345';
+    const createUser = await user.checkId();
+
+    expect(createUser).toEqual({ success: false, msg: '이미 존재하는 아이디입니다.' });
+    expect(checkIdDuplication.mock.calls.length).toBe(1);
+  });
 
   // it('password 길이가 8자 이하라면 throw error 반환', () => {
   //   expect().toBeTruthy();

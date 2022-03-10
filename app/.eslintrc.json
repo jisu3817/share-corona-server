@@ -24,6 +24,7 @@
       "no-console": "off",
       "class-methods-use-this": "off",
       "@typescript-eslint/no-explicit-any": "off",
+      "no-useless-catch": "off",
       "prettier/prettier": [
         "error",
         {
