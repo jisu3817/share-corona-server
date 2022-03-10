@@ -22,6 +22,7 @@
     "rules": {
       // 배포 전에 on
       "no-console": "off",
+      "class-methods-use-this": "off",
       "@typescript-eslint/no-explicit-any": "off",
       "prettier/prettier": [
         "error",

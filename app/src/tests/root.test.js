@@ -1,6 +1,6 @@
 import 'regenerator-runtime';
 import User from '../models/services/user/user';
-// import stubUser from './stub_root.test';
+import StubUser from './stub_root';
 
 describe('회원가입', () => {
   let user;
@@ -17,34 +17,24 @@ describe('회원가입', () => {
       },
     };
 
-    user = new User(req);
+    user = new User(req, new StubUser());
   });
 
-  it('if id is undefined, success returns false with a msg', async () => {
+  it('if id is undefined, obj returns false with a msg', async () => {
     delete req.body.id;
     const createUser = await user.signUp();
     expect(createUser).toEqual({ success: false, msg: '아이디 값을 입력해주세요.' });
   });
 
-  it('if id length less than 5, success returns false with a msg', async () => {
+  it('if id length less than 5, obj returns false with a msg', async () => {
     const createUser = await user.signUp();
     expect(createUser).toEqual({ success: false, msg: '아이디 값이 5자 이하입니다.' });
   });
 
-  // it('If the id does not pass validation success returns false with a msg', async () => {
-  //   const req = {
-  //     body: {
-  //       id: '123456',
-  //       password: '123',
-  //       checkPassword: '123',
-  //       email: '123@naver.com',
-  //       nickname: '123',
-  //       district: '123',
-  //     },
-  //   };
-
-  //   user = new User(req);
-  // });
+  it('if id is duplicated, obj returns false with a msg', async () => {
+    const createUser = await user.signUp();
+    expect(createUser).toEqual({ success: false, msg: '이미 존재하는 아이디입니다.' });
+  });
 
   // it('unique id가 아니라면 throw error 반환', () => {
   //   expect().toBeTruthy();

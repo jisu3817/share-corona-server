@@ -1,7 +1,7 @@
-// class stubUser {
-//   async idCheck() {
-//     return true;
-//   }
-// }
+class stubUser {
+  async checkIdDuplication() {
+    return { id: '123' };
+  }
+}
 
-// module.exports = stubUser;
+module.exports = stubUser;
