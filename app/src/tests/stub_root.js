@@ -1,7 +1,7 @@
-class stubUser {
-  async checkIdDuplication() {
-    return { id: '12345' };
+class StubUser {
+  checkPasswordValidation() {
+    return false;
   }
 }
 
-export default stubUser;
+export default StubUser;

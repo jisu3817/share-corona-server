@@ -3,7 +3,6 @@ import User from '../models/services/User/User';
 import UserStorage from '../models/services/User/UserStorage';
 
 jest.mock('../models/services/User/UserStorage');
-
 let user;
 let req;
 
@@ -79,7 +78,7 @@ describe('checkId 함수 테스트', () => {
     req.body.id = '12345';
     const createId = await user.checkId();
 
-    expect(createId).toEqual({ success: true, msg: '아이디 유효성 검사 완료' });
+    expect(createId).toEqual({ success: true });
     expect(checkIdDuplication.mock.calls.length).toBe(1);
   });
 });
@@ -98,7 +97,61 @@ describe('checkPassword 함수 테스트', () => {
     expect(createPassword).toEqual({ success: false, msg: '비밀번호는 8자리 이상 가능합니다.' });
   });
 
-  // it('password 값이 유효성 검사를 통과하지 못하는 경우 false 반환', () => {});
+  it('isInvalidCheck가 false인 경우 false 반환', async () => {
+    user.checkPasswordValidation = jest.fn(() => false);
+    const { checkPasswordValidation } = user;
+
+    req.body.password = '12345678';
+
+    const createPassword = await user.checkPassword();
+
+    expect(createPassword).toEqual({
+      success: false,
+      msg: '비밀번호는 소문자, 숫자, 특수문자를 모두 포함해야 합니다.',
+    });
+
+    expect(checkPasswordValidation.mock.calls.length).toBe(1);
+  });
+
+  it('isInvalidCheck가 true인 경우 false 반환', async () => {
+    user.checkPasswordValidation = jest.fn(() => false);
+    const { checkPasswordValidation } = user;
+
+    req.body.password = '12345678';
+
+    const createPassword = await user.checkPassword();
+
+    expect(createPassword).toEqual({
+      success: false,
+      msg: '비밀번호는 소문자, 숫자, 특수문자를 모두 포함해야 합니다.',
+    });
+
+    expect(checkPasswordValidation.mock.calls.length).toBe(1);
+  });
+
+  // it('password 값이 모두 영어인 경우 false 반환', async () => {
+  //   req.body.password = '12345678';
+  // });
+
+  // it('password 값이 모두 특수문자인 경우 false 반환', async () => {
+  //   req.body.password = '12345678';
+  // });
+
+  // it('password 값이 특수문자가 없는 경우 false 반환', async () => {
+  //   req.body.password = '12345678';
+  // });
+
+  // it('password 값이 숫자가 없는 경우 false 반환', async () => {
+  //   req.body.password = '12345678';
+  // });
+
+  // it('password 값이 영어가 없는 경우 false 반환', async () => {
+  //   req.body.password = '12345678';
+  // });
+
+  // it('password 값이 유효성 검사를 만족 경우 true 반환', async () => {
+  //   req.body.password = '12345678';
+  // });
 
   // it('password 값이 유효성 검사를 통과할 경우 false 반환', () => {});
 });

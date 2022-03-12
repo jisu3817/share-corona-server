@@ -3,7 +3,7 @@ import UserStorage from './UserStorage';
 
 interface response {
   success: boolean;
-  msg: string;
+  msg?: string;
 }
 
 interface error {
@@ -47,7 +47,7 @@ class User {
 
       if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
       // 토큰 생성 코드가 들어갈 곳.
-      return { success: true, msg: '아이디 유효성 검사 완료' };
+      return { success: true };
     } catch (err) {
       return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
     }
@@ -58,8 +58,11 @@ class User {
 
     try {
       if (password === undefined) return { success: false, msg: '비밀번호를 입력해주세요.' };
-      if (password.length < 9) return { success: false, msg: '비밀번호는 8자리 이상 가능합니다.' };
+      if (password.length < 8) return { success: false, msg: '비밀번호는 8자리 이상 가능합니다.' };
 
+      const isInvalidCheck = this.checkPasswordValidation();
+
+      if (!isInvalidCheck) return { success: false, msg: '비밀번호는 소문자, 숫자, 특수문자를 모두 포함해야 합니다.' };
       // const DuplicatedId = await UserStorage.checkIdDuplication(userId);
 
       // if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
@@ -68,6 +71,13 @@ class User {
     } catch (err) {
       return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
     }
+  }
+
+  checkPasswordValidation() {
+    const { password } = this.body;
+
+    if (!password) return false;
+    return true;
   }
 }
 
