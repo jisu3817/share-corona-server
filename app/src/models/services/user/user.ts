@@ -1,15 +1,16 @@
 import { Request } from 'express';
 import UserStorage from './UserStorage';
 
-interface response {
-  success: boolean;
+interface iResponse {
+  success?: boolean;
   msg?: string;
 }
 
-interface error {
+interface iError {
   isError: boolean;
   errMsg: any;
   clientMsg: string;
+  success?: boolean;
 }
 
 class User {
@@ -19,24 +20,25 @@ class User {
     this.body = req.body;
   }
 
-  // async signUp(): Promise<response | error> {
-  //   const user: any = this.body;
+  async signUp(): Promise<iResponse | iError> {
+    // const user: any = this.body;
 
-  //   try {
-  //     if (user.id === undefined) return { success: false, msg: '아이디 값을 입력해주세요.' };
-  //     if (user.id.length < 5) return { success: false, msg: '아이디 값이 5자 이하입니다.' };
+    try {
+      const checkIdResult = await this.checkId();
 
-  //     const DuplicatedId = await UserStorage.checkIdDuplication(user.id);
+      if (!checkIdResult.success) return checkIdResult;
 
-  //     if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
-  //     // 토큰 생성 코드가 들어갈 곳.
-  //     return { success: true, msg: '회원가입 완료' };
-  //   } catch (err) {
-  //     return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
-  //   }
-  // }
+      const checkPasswordResult = await this.checkPassword();
 
-  async checkId(): Promise<response | error> {
+      if (!checkPasswordResult.success) return checkPasswordResult;
+
+      return { success: true, msg: '회원가입 완료' };
+    } catch (err) {
+      return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
+    }
+  }
+
+  async checkId(): Promise<iResponse | iError> {
     const { id } = this.body;
 
     try {
@@ -46,28 +48,25 @@ class User {
       const DuplicatedId = await UserStorage.checkIdDuplication(id);
 
       if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
-      // 토큰 생성 코드가 들어갈 곳.
+
       return { success: true };
     } catch (err) {
       return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
     }
   }
 
-  async checkPassword(): Promise<response | error> {
+  async checkPassword(): Promise<iResponse | iError> {
     const { password } = this.body;
+    const { checkPassword } = this.body;
 
     try {
       if (password === undefined) return { success: false, msg: '비밀번호를 입력해주세요.' };
-      if (password.length < 8) return { success: false, msg: '비밀번호는 8자리 이상 가능합니다.' };
 
       const isInvalidCheck = this.checkPasswordValidation();
 
-      if (!isInvalidCheck) return { success: false, msg: '비밀번호는 소문자, 숫자, 특수문자를 모두 포함해야 합니다.' };
-      // const DuplicatedId = await UserStorage.checkIdDuplication(userId);
-
-      // if (DuplicatedId !== undefined) return { success: false, msg: '이미 존재하는 아이디입니다.' };
-      // 토큰 생성 코드가 들어갈 곳.
-      return { success: true, msg: '회원가입 완료' };
+      if (!isInvalidCheck) return { success: false, msg: '비밀번호 조건을 확인해주세요.' };
+      if (password !== checkPassword) return { success: false, msg: '비밀번호와 비밀번호 확인 값이 다릅니다.' };
+      return { success: true };
     } catch (err) {
       return { isError: true, errMsg: err, clientMsg: '알 수 없는 에러입니다. 서버 개발자에게 문의해주세요.' };
     }
@@ -76,8 +75,9 @@ class User {
   checkPasswordValidation() {
     const { password } = this.body;
 
-    if (!password) return false;
-    return true;
+    const regExp = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&^])[a-z\d@$!%*#?&^]{8,}$/;
+
+    return regExp.test(password);
   }
 }
 
