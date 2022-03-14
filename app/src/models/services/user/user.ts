@@ -80,5 +80,3 @@ class User {
     return regExp.test(password);
   }
 }
-
-export default User;

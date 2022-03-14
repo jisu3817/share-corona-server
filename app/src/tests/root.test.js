@@ -125,6 +125,10 @@ describe('checkId 함수 테스트', () => {
 
     UserStorage.checkIdDuplication = checkIdDuplication;
 
+    // UserStorage.mockImplementation(() => {
+    //   return checkIdDuplication;
+    // });
+
     req.body.id = '12345';
     const createId = await user.checkId();
 

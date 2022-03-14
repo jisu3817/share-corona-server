@@ -1,4 +1,3 @@
-/* eslint-disable consistent-return */
 import { Request, Response } from 'express';
 import User from '../../models/services/User/User';
 
@@ -10,7 +9,7 @@ interface iResponse {
   clientMsg?: string;
 }
 
-const process: any = {
+const process = {
   signUp: async (req: Request, res: Response): Promise<Response> => {
     const user = new User(req);
     const response: iResponse = await user.signUp();
@@ -21,4 +20,4 @@ const process: any = {
   },
 };
 
-export default { process };
+export { process };
